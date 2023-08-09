@@ -1,0 +1,60 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+@model Stockmantras.Models.News
+
+
+<h1>Create</h1>
+
+<h4>News</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="N_ID" class="control-label"></label>
+                <input asp-for="N_ID" class="form-control" />
+                <span asp-validation-for="N_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N_HEADING" class="control-label"></label>
+                <input asp-for="N_HEADING" class="form-control" />
+                <span asp-validation-for="N_HEADING" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N_BRIEF" class="control-label"></label>
+                <input asp-for="N_BRIEF" class="form-control" />
+                <span asp-validation-for="N_BRIEF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N_IMG_URL" class="control-label"></label>
+                <input asp-for="N_IMG_URL" class="form-control" />
+                <span asp-validation-for="N_IMG_URL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

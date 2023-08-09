@@ -1,0 +1,43 @@
+    
+
+        .angelcard {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .angelcard-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .angelcard-subheader {
+            font-size: 18px;
+            color: #555555;
+            margin-bottom: 20px;
+        }
+
+        .angelcard-logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .angelcard-button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .angelcard-button:hover {
+            background-color: #0056b3;
+        }

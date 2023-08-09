@@ -1,0 +1,243 @@
+﻿<title>aryamoneygrow.com</title>
+<meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
+Are you looking to venture into the world of stock market investments and mutual funds? Look no further! Arya Money Grow is your one-stop-shop for all your financial needs, catering to beginners and seasoned investors alike. With a focus on providing up-to-date information, comprehensive investment tools, and personalized guidance, Arya Money Grow ensures that you make informed decisions to grow your wealth.
+At Arya Money Grow, we understand the importance of staying updated with live stock prices. Whether you are interested in tracking the Nifty, Sensex, or Bank Nifty, our website offers real-time data to help you make timely investment choices. We believe that knowledge is power, and therefore, we provide you with in-depth analysis and market insights, keeping you ahead of the game.
+Investment options can be overwhelming, but with Arya Money Grow, the process becomes seamless. Our platform empowers you to open a demat account effortlessly. Take advantage of our partnership with Angel One, a leading brokerage firm, to enjoy the benefits of their services and expertise in the stock market. We believe in transparent dealings and, thus, ensure that you are informed about all the demat account charges upfront.
+Mutual funds offer an excellent way to diversify your investment portfolio, and Arya Money Grow offers a plethora of options to explore. We provide comprehensive information on mutual fund companies, their performance, and investment plans available in the market. Our aim is to empower you with the necessary knowledge to invest wisely and achieve your financial goals.
+Are you unsure about which mutual funds to invest in? Worry not! Arya Money Grow's team of financial experts has curated a list of top-performing mutual funds, tailored to suit various risk appetites. By analyzing your preferences and financial objectives, we help you build a custom mutual fund portfolio that aligns with your long-term goals.
+With Arya Money Grow, accessing the stock market and mutual fund investments is now just a click away. Our user-friendly online demat account opening process ensures that you can start your investment journey within minutes. No more waiting in long queues or dealing with paperwork; we streamline the process to provide you with a hassle-free experience.
+Our platform offers a wide range of stock market stocks, bonds, and mutual funds to choose from, allowing you to diversify your investments and manage risk effectively. We understand that each investor is unique, and our goal is to cater to your specific needs, ensuring that you receive personalized attention and support at every step.
+Angel One, our trusted partner, is a renowned name in the industry, and its expertise ensures that you can buy mutual funds and other investment products with confidence. As you explore mutual fund information, you'll discover the benefits of professional fund management and how it can work in your favor.
+Our website is a treasure trove of valuable information about the money market, mutual funds, and the stock market. You can find detailed insights about investment strategies, mutual fund performance, market news, and more. Arya Money Grow is your go-to source for staying informed about the ever-changing financial landscape.
+We believe in transparency and aim to provide you with a comprehensive understanding of demat charges and other related expenses. Our commitment to guiding you towards smart investments is what sets us apart from the rest.
+In conclusion, Arya Money Grow is your reliable partner for stock market investments, mutual fund planning, and achieving your financial aspirations. With our extensive range of services and a user-friendly interface, we make sure that you have everything you need to make sound financial decisions.
+Begin your investment journey with Arya Money Grow today and witness your money grow steadily and securely. Let us help you build a prosperous financial future together!" />
+
+<meta name="keywords" content="portfolio, manage your portfolio, paper trade, create your own portfolio, track your investments, live stock price, nifty, sensex, Bank Nifty, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
+<meta name="author" content="mukesh chauhan" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+@{
+    Layout = "_Layout_users";
+}
+
+@{var successMessage = TempData["StockBought"] as string; }
+<style>
+    /* Custom styles for the menu */
+    .nav .nav-link {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 20px;
+    }
+
+    .submenu {
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav .nav-item:hover .submenu {
+        display: block;
+    }
+
+    .nav .nav-item:hover .nav-link {
+        background-color: #f2f2f2;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    body {
+        color: black;
+    }
+
+   @* .btn {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }*@
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Portfolio</title>
+<body>
+    @if (ViewBag.NoStocks != null && ViewBag.NoStocks)
+    {
+        <div class="card">
+            <h3>Your Portfolio</h3>
+            <p>Haven't ventured into creation yet? Begin investing and witness the blossoming of your growth.</p>
+            <a class="btn btn-outline-primary" asp-controller="User" asp-action="BuyStocks">Create Your Portfolio</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="card col-lg-12 col-md-8">
+                <div class="card-header bg-primary text-white">
+                    Your Investments :
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @model List<aryamoneygrow.Models.MyPortfolio>;
+
+                        <table class="table table-hover" style="color:black">
+                            <thead>
+                                <tr>
+                                    <th>Trade Date</th>
+                                    <th>Company</th>
+                                    <th>Quantity</th>
+                                    <th>Buy Price</th>
+                                    <th>Current Price</th>
+                                    <th>Investment Value</th>
+                                    <th>Current Value</th>
+                                    <th>Profit/Loss</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    double totalInvestment = 0;
+                                    double currentVal = 0;
+
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>@item.Portfolio.TRADE_DATE.ToString("dd-MM-yyyy")</td>
+                                        <td style="text-align:left">@item.Portfolio.SCRIPT_NAME</td>
+                                        <td>@item.Portfolio.QUANTITY</td>
+                                        <td>@Math.Round(item.Portfolio.PRICE, 2)</td>
+                                        <td>@Math.Round(item.EquitiesLTP, 2)</td>
+                                        <td>@Math.Round(item.Portfolio.INVESTED_AMOUNT, 2)</td>
+                                        <td style="color: @(item.EquitiesLTP * item.Portfolio.QUANTITY <= item.Portfolio.PRICE * item.Portfolio.QUANTITY ? "red" : "green")">
+                                            @Math.Round(item.EquitiesLTP * item.Portfolio.QUANTITY, 2)
+                                        </td>
+                                        <!-- ... Display more Portfolio fields ... -->
+                                        @{
+                                            double x = (@item.EquitiesLTP * @item.Portfolio.QUANTITY - @item.Portfolio.PRICE * @item.Portfolio.QUANTITY);
+                                        }
+
+                                        <td style="color: @(x <= 0 ? "red" : "green")"> @Math.Round(x, 2)</td>
+                                        <td>@item.Portfolio.REMARK</td>
+
+                                    </tr>
+
+                                    totalInvestment += item.Portfolio.PRICE * item.Portfolio.QUANTITY;
+                                    currentVal += item.EquitiesLTP * item.Portfolio.QUANTITY;
+
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td><strong>Total Investment:</strong></td>
+                                    <td style="text-anchor"><b>@Math.Round(totalInvestment, 2)</b></td>
+                                    <td><strong>Current Value:</strong></td>
+                                    <td style="color: @(currentVal <= totalInvestment ? "red" : "green")"><b>@Math.Round(currentVal, 2)</b></td>
+                                    <td><strong>Gross Profit/Loss:</strong></td>
+                                    <td style="color: @(currentVal <= totalInvestment ? "red" : "green")"><b>@Math.Round(currentVal - totalInvestment, 2)</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td><strong>Net Gain on Portfolio:</strong></td>
+                                    @{double valPerc = (currentVal - totalInvestment) / totalInvestment * 100;}
+                                    <td style="color: @(currentVal <= totalInvestment ? "red" : "green")"><b>@Math.Round(valPerc, 2)%</b></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" card col-lg-6 col-md-8 col-sm-12">
+                <div class="card-header bg-primary text-white"><strong>Portfolio's Distribution'</strong></div>
+                <div class="card-body"><canvas id="myPieChart"></canvas></div>
+            </div>
+        </div>
+       
+
+    }
+</body>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--trying to display data in chart-->
+<script>
+    // Get the tabular data (replace this with your actual data)
+    var dataFromTable = [
+        @foreach (var item in Model)
+        {
+            @:{ SCRIPT_NAME: "@item.Portfolio.SCRIPT_NAME", INVESTED_AMOUNT: @item.Portfolio.INVESTED_AMOUNT },
+        }
+    ];
+    // Extract script names and invested amounts
+    var scriptNames = dataFromTable.map(item => item.SCRIPT_NAME);
+    var investedAmounts = dataFromTable.map(item => item.INVESTED_AMOUNT);
+
+    // Create a random color palette (for demonstration purposes)
+    var colors = [];
+    for (var i = 0; i < scriptNames.length; i++) {
+        colors.push('#' + (Math.random().toString(16) + '000000').substring(2, 8));
+    }
+
+    // Create the 3D pie chart
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: scriptNames,
+            datasets: [{
+                data: investedAmounts,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+
+<!--for displaying toast-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = "@successMessage";
+        if (successMessage !== "") {
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: successMessage
+            });
+        }
+    });
+</script>

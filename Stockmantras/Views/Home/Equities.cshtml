@@ -1,0 +1,259 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+<title>aryamoneygrow.com</title>
+<meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
+Are you looking to venture into the world of stock market investments and mutual funds? Look no further! Arya Money Grow is your one-stop-shop for all your financial needs, catering to beginners and seasoned investors alike. With a focus on providing up-to-date information, comprehensive investment tools, and personalized guidance, Arya Money Grow ensures that you make informed decisions to grow your wealth.
+At Arya Money Grow, we understand the importance of staying updated with live stock prices. Whether you are interested in tracking the Nifty, Sensex, or Bank Nifty, our website offers real-time data to help you make timely investment choices. We believe that knowledge is power, and therefore, we provide you with in-depth analysis and market insights, keeping you ahead of the game.
+Investment options can be overwhelming, but with Arya Money Grow, the process becomes seamless. Our platform empowers you to open a demat account effortlessly. Take advantage of our partnership with Angel One, a leading brokerage firm, to enjoy the benefits of their services and expertise in the stock market. We believe in transparent dealings and, thus, ensure that you are informed about all the demat account charges upfront.
+Mutual funds offer an excellent way to diversify your investment portfolio, and Arya Money Grow offers a plethora of options to explore. We provide comprehensive information on mutual fund companies, their performance, and investment plans available in the market. Our aim is to empower you with the necessary knowledge to invest wisely and achieve your financial goals.
+Are you unsure about which mutual funds to invest in? Worry not! Arya Money Grow's team of financial experts has curated a list of top-performing mutual funds, tailored to suit various risk appetites. By analyzing your preferences and financial objectives, we help you build a custom mutual fund portfolio that aligns with your long-term goals.
+With Arya Money Grow, accessing the stock market and mutual fund investments is now just a click away. Our user-friendly online demat account opening process ensures that you can start your investment journey within minutes. No more waiting in long queues or dealing with paperwork; we streamline the process to provide you with a hassle-free experience.
+Our platform offers a wide range of stock market stocks, bonds, and mutual funds to choose from, allowing you to diversify your investments and manage risk effectively. We understand that each investor is unique, and our goal is to cater to your specific needs, ensuring that you receive personalized attention and support at every step.
+Angel One, our trusted partner, is a renowned name in the industry, and its expertise ensures that you can buy mutual funds and other investment products with confidence. As you explore mutual fund information, you'll discover the benefits of professional fund management and how it can work in your favor.
+Our website is a treasure trove of valuable information about the money market, mutual funds, and the stock market. You can find detailed insights about investment strategies, mutual fund performance, market news, and more. Arya Money Grow is your go-to source for staying informed about the ever-changing financial landscape.
+We believe in transparency and aim to provide you with a comprehensive understanding of demat charges and other related expenses. Our commitment to guiding you towards smart investments is what sets us apart from the rest.
+In conclusion, Arya Money Grow is your reliable partner for stock market investments, mutual fund planning, and achieving your financial aspirations. With our extensive range of services and a user-friendly interface, we make sure that you have everything you need to make sound financial decisions.
+Begin your investment journey with Arya Money Grow today and witness your money grow steadily and securely. Let us help you build a prosperous financial future together!" />
+
+<meta name="keywords" content="daily nifty and bank nifty important levels, market levels, market today, live stock price, nifty, sensex, Bank Nifty, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
+<meta name="author" content="mukesh chauhan" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+@{
+    var nifty50Stocks = ViewBag.Nifty50Stocks_list as List<Nifty50Stocks>;
+}
+
+<style>
+    h4 {
+        color: black;
+    }
+
+    .calculator-container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .result {
+        margin-top: 10px;
+        font-weight: bold;
+        color: black;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-6">
+        <partial name="MarketToday" />
+
+    </div>
+    <!--market gainers and losers-->
+    <div class="col-6 card">
+        <div>
+
+            @if (ViewBag.Nifty50Stocks_list != null)
+            {
+
+                var stocksList = ViewBag.Nifty50Stocks_list as List<Nifty50Stocks>;
+                var sortedStocks = stocksList.OrderBy(s => (s.LTP - s.PREV_CLOSE) / s.PREV_CLOSE * 100);
+                var topFive = sortedStocks.Take(5);
+                var bottomFive = sortedStocks.TakeLast(5).Reverse();
+
+
+                <div class="card-header bg-primary"><b style="color:white">Nifty Top Losers </b></div>
+                <div class="card-group">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Company</th>
+                            <th>Current Price</th>
+                            <th></th>
+                            <th>Change</th>
+                            <th>Loss</th>
+                        </tr>
+                        @foreach (var stock in topFive)
+                        {
+                            <tr style="color:red">
+                                <td>@stock.STOCK_NAME</td>
+                                <td>@Math.Round(stock.LTP, 2)</td>
+                                <td><span style="color: red; padding-right: 5px">&#9660;</span></td>
+                                <td>@Math.Round(stock.LTP - @stock.PREV_CLOSE, 2)</td>
+                                <td>@Math.Round(((stock.LTP - stock.PREV_CLOSE) / stock.PREV_CLOSE * 100), 2)%</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+                <div class="card-header bg-primary"><b style="color:white">Nifty Top Gainers </b></div>
+                <div class="card-group">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Company</th>
+                            <th>Current Price</th>
+                            <th></th>
+                            <th>Change</th>
+                            <th>Gain</th>
+                        </tr>
+                        @foreach (var stock in bottomFive)
+                        {
+                            <tr style="color:green">
+                                <td>@stock.STOCK_NAME</td>
+                                <td>@Math.Round(stock.LTP, 2)</td>
+                                <td><span style="color: green; padding-right: 5px">&#9650;</span></td>
+                                <td>@Math.Round(stock.LTP - @stock.PREV_CLOSE, 2)</td>
+                                <td>@Math.Round(((stock.LTP - stock.PREV_CLOSE) / stock.PREV_CLOSE * 100), 2)%</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+            }
+            else
+            {
+                <p>No data available.</p>
+            }
+        </div>
+
+
+    </div>
+
+    <!--market overview-->
+    <!--sip calculator-->
+    <div class=" col-sm-6" style="background:content-box; padding:5px;">
+        <div class="card" style="padding:20px">
+            <div class="row">
+                <div class="card-header bg-primary text-white"><b>SIP Calculator</b></div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <label for="sipAmount">Amount per month :</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="sipAmount" step="100" placeholder="Enter Amount" style="width:100%" />
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <label for="sipDuration">Duration (in years):</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="sipDuration" step="1" placeholder="Enter Duration" style="width:100%" />
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <label for="sipInterest">Expected Annual Return (%):</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="sipInterest" step="0.1" placeholder="Enter Return" style="width:100%" />
+                </div>
+                <div class="result bg-light" style="padding:10px">
+                    <p>Total Investment: <span id="sipTotalInvestment">-</span></p>
+                    <p>Total Returns: <span id="sipTotalReturns">-</span></p>
+                    <p>Wealth Gained: <span id="sipWealthGained">-</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="padding:20px">
+            <div class="card-header bg-primary text-white"><b>Lumpsum Calculator</b></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="lumpsumAmount">Investment Amount:</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="lumpsumAmount" step="1000" placeholder="Enter Amount" style="width:100%" />
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <label for="lumpsumDuration">Duration (in years):</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="lumpsumDuration" step="1" placeholder="Enter Duration" style="width:100%" />
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <label for="lumpsumInterest">Expected Annual Return (%):</label>
+                </div>
+                <div class="col-sm-6" style="padding-top:15px">
+                    <input type="number" id="lumpsumInterest" step="0.1" placeholder="Enter Return" style="width:100%" />
+                </div>
+            </div>
+            <div class="result bg-light" style="padding:10px">
+                <p>Total Investment: <span id="lumpsumTotalInvestment">-</span></p>
+                <p>Total Returns: <span id="lumpsumTotalReturns">-</span></p>
+                <p>Wealth Gained: <span id="lumpsumWealthGained">-</span></p>
+            </div>
+        </div>
+    </div>
+    <!--our recommendations-->
+    <div class="col-sm-6 card" style="margin-block-end:auto">
+        <div class="container mt-4">
+            <div class="card-header bg-primary text-white"><h5 class="text-center mb-4">Our Recommendations </h5></div>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Stock Name</th>
+
+                        <th scope="col">Recommendation Price</th>
+                        <th scope="col">Current Price</th>
+                        <th scope="col">Gain/Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>ITC </td>
+                        <td>INR 220</td>
+                        <td>INR 450</td>
+                        <td class="text-success">more than 100 % </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Reliance B</td>
+                        <td>INR 1850</td>
+                        <td>INR 2650 </td>
+                        <td class="text-success">more than 45 % </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<br />
+<div class="alert-danger card" style="text-align:justify; padding:20px;">
+    Investing in the securities market carries inherent risks. The research and information provided here are intended solely for informational and investment purposes. However, it is crucial to acknowledge that investing may expose you to financial risks. Therefore, it is strongly advised that you conduct your own thorough due diligence and seek guidance from a qualified financial advisor before making any investment decisions. The responsibility for any investment choices lies solely with the individual investor, and we do not take responsibility for any financial losses incurred due to investments made based on the information provided here.
+</div>
+
+<script>
+    function calculateSIP() {
+        const sipAmount = 12 * parseFloat(document.getElementById("sipAmount").value);
+        const sipDuration = parseInt(document.getElementById("sipDuration").value);
+        const sipInterest = parseFloat(document.getElementById("sipInterest").value) / 100;
+        const monthlyReturns = sipAmount * ((Math.pow(1 + sipInterest, sipDuration) - 1) / sipInterest);
+
+        document.getElementById("sipTotalInvestment").innerText = (sipAmount * sipDuration).toFixed(2);
+        document.getElementById("sipTotalReturns").innerText = monthlyReturns.toFixed(2);
+        document.getElementById("sipWealthGained").innerText = (monthlyReturns - sipAmount * sipDuration).toFixed(2);
+    }
+
+    function calculateLumpsum() {
+        const lumpsumAmount = parseFloat(document.getElementById("lumpsumAmount").value);
+        const lumpsumDuration = parseInt(document.getElementById("lumpsumDuration").value);
+        const lumpsumInterest = parseFloat(document.getElementById("lumpsumInterest").value) / 100;
+        const lumpsumReturns = lumpsumAmount * Math.pow(1 + lumpsumInterest, lumpsumDuration);
+
+        document.getElementById("lumpsumTotalInvestment").innerText = lumpsumAmount.toFixed(2);
+        document.getElementById("lumpsumTotalReturns").innerText = lumpsumReturns.toFixed(2);
+        document.getElementById("lumpsumWealthGained").innerText = (lumpsumReturns - lumpsumAmount).toFixed(2);
+    }
+
+    document.getElementById("sipAmount").addEventListener("input", calculateSIP);
+    document.getElementById("sipDuration").addEventListener("input", calculateSIP);
+    document.getElementById("sipInterest").addEventListener("input", calculateSIP);
+    document.getElementById("lumpsumAmount").addEventListener("input", calculateLumpsum);
+    document.getElementById("lumpsumDuration").addEventListener("input", calculateLumpsum);
+    document.getElementById("lumpsumInterest").addEventListener("input", calculateLumpsum);
+
+</script>

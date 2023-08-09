@@ -1,0 +1,121 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<div class="row" style="margin-top:50px;"></div>
+<div class="row">
+    <div class="col-md-4"></div>
+
+    <div class="col col-md-4 form-container">
+
+        <div class="row">
+            <div class="image-container">
+                <h3>Position Size Calculator</h3>
+            </div>
+            <div class="col-12">
+                <form id="poSize">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">Portofolio Size (In INR) :</label>
+                        <input type="number" class="form-control" id="portsize" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Risk per Trade (in % of Total Portfolio):</label>
+                        <select id="riskper" class="form-control">
+                            <option value="1">1 %</option>
+                            <option value="2">2 %</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Entry Price :(In INR) :</label>
+                        <input type="number" class="form-control" id="entryprice" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Stop Loss (Exit Price) :</label>
+                        <input type="number" class="form-control" id="stoploss" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Target Price :</label>
+                        <input type="number" class="form-control" id="targetprice" required />
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="form-group col-md-6" style="margin-top:30px;">
+                            <input type="submit" value="Calculate Trade" class="btn btn-primary" onclick="calculatePosition();return false;" />
+                        </div>
+                        <div class="form-group col-md-3" style="margin-top:30px;">
+                            <input type="button" value="Reset" class="btn btn-primary" onclick="this.form.reset();">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <p id="part1" class="alert-info"></p>
+                        <p id="part2" class="alert-info"></p>
+                        <p id="part3" class="alert-info"></p>
+                        <p id="part4" class="alert-info"></p>
+                        <p id="part5" class="alert-info"></p>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <script>
+        function calculatePosition() {
+            try {
+                var portsize = document.getElementById('portsize').value;
+                var riskper = document.getElementById('riskper').value;
+                var entprice = document.getElementById('entryprice').value;
+                var exitprice = document.getElementById('stoploss').value;
+                var tgtprice = document.getElementById('targetprice').value;
+                if (entprice < tgtprice) {
+
+                    if (exitprice > entprice) {
+                        alert("Stoploss price should be less than Entry price.");
+                    } else {
+                        var x = portsize * riskper / 100;
+                        var y = entprice - exitprice;
+                        var buysize = Math.round(x / y);
+
+                        var tot_investment = buysize * entprice;
+                        var tot_allocation = (tot_investment / portsize) * 100;
+                        var r_ratio = (tgtprice - entprice) / y;
+                        var advice = null;
+                        if (r_ratio > 2) {
+                            advice = "Good Risk to Reward Ratio";
+                            document.getElementById("part5").setAttribute('style', 'color:green;');
+                        } else {
+                            advice = "Risk Reward is not favourable.";
+                            document.getElementById("part5").setAttribute('style', 'color:red;');
+                        }
+                        document.getElementById("part1").innerHTML = "Buy Quantity: " + buysize;
+                        document.getElementById("part2").innerHTML = "Total Investment :" + tot_investment;
+                        document.getElementById("part3").innerHTML = "Allocation % of Portfolio :" + tot_allocation;
+                        document.getElementById("part4").innerHTML = "Risk to Reward Ratio :" + r_ratio;
+                        document.getElementById("part5").innerHTML = advice;
+
+
+                        // alert(tot_allocation);
+
+                        // alert(r_ratio);
+                    }
+                } else {
+                    alert("Entry Price should be less than Target Price.");
+                }
+
+
+
+            } catch (err) { alert(err.message); }
+
+
+        }
+    </script>
+</div>

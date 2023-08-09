@@ -1,0 +1,87 @@
+﻿<header>
+    <style>
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+            
+        }
+
+            .sidebar ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .sidebar li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar a {
+                color: cornflowerblue;
+                text-decoration: none;
+            }
+            .sidebar ul li a {
+                color: black; /* Set the default color */
+                text-decoration: none; /* Remove underline */
+                cursor: default; /* Set the default cursor style */
+            }
+
+                .sidebar ul li a:hover {
+                    color: red; /* Change the color on hover */
+                    cursor: pointer; /* Change the cursor style on hover */
+                    background-color: yellow;
+                }
+            .li:hover{
+                background-color:silver;
+            }
+            
+    </style>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 bg-primary">
+        <div class="container">
+
+            <img src="~/images/armtest.png" style="width:65px;height:65px;" alt="Home" />
+            <h3 class="navbar-brand" style="color:white;">Arya Money Grow Investments</h3>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                <ul class="navbar-nav flex-grow-1 dropright">
+                    <partial name="_LoginInfo.cshtml" />
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+
+</header>
+<script>
+        function showDashboard() {
+            document.getElementById("dashboardForm").style.display = "block";
+        document.getElementById("addEvents").style.display = "none";
+        document.getElementById("usersData").style.display = "none";
+    }
+
+        function addEvents() {
+            document.getElementById("dashboardForm").style.display = "none";
+            document.getElementById("addEvents").style.display = "block";
+        document.getElementById("usersData").style.display = "none";
+    }
+
+        function showUsers() {
+            document.getElementById("dashboardForm").style.display = "none";
+            document.getElementById("addEvents").style.display = "none";
+        document.getElementById("usersData").style.display = "block";
+    }
+
+
+
+    // for click on user show
+    document.getElementById("showUsers").addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "/Admin/Index";
+    });
+</script>

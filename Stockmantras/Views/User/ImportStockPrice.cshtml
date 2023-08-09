@@ -1,0 +1,16 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+@model aryamoneygrow.Models.Nifty50Stocks
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="csvFile" accept=".csv" />
+    <button type="submit">Import</button>
+</form>

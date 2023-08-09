@@ -1,0 +1,88 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+@{
+
+    var successMessage = TempData["MFDeleted"] as string;
+}
+@model IEnumerable<aryamoneygrow.Models.MutualFund>
+<table class="table table-responsive my-table">
+    <thead style="border:groove">
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+
+        </tr>
+    </thead>
+    <tbody style="border:groove">
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.FUND_ID</td>
+                <td>@contact.FUND_NAME</td>
+                <td>@contact.FUND_DESC</td>
+                <td>@contact.FUND_LOGO_URL</td>
+                <td>@contact.FUND_MORE_URL</td>
+                <td>
+                    <form method="post" action="@Url.Action("DeleteMF", new { id = contact.FUND_ID})">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    .my-table th,
+    .my-table td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    .my-table th {
+        background-color: beige;
+    }
+
+    .my-table tr:hover {
+        background-color: white;
+    }
+
+    .my-table .delete-button {
+        padding: 6px 12px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .my-table .delete-button:hover {
+            background-color: #c82333;
+</style>
+
+<!--to display success message-->
+<script src="~/other_scripts/sweetAlert.min.js"></script>
+<link href="~/other_scripts/sweetAlerts.min.css" rel="stylesheet" />
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = "@successMessage";
+        if (successMessage !== "") {
+            Swal.fire({
+                icon: "success",
+                title: "Deleted !",
+                text: successMessage
+            });
+        }
+    });
+</script>

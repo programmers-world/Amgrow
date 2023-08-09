@@ -1,0 +1,86 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+
+<style>
+    /* Add custom styles to the form elements */
+
+    /* Input fields */
+    .form-control {
+        border-radius: 4px;
+        border-color: #ccc;
+        box-shadow: none;
+    }
+
+    /* Labels */
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Submit button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    /* Apply overall styling to the form */
+    .form-wrapper {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+        /* Apply spacing between form elements */
+        .form-wrapper .form-group {
+            margin-bottom: 15px;
+        }
+</style>
+<div class="container form-control">
+    <form asp-controller="User" asp-action="CreateNews" method="post">
+        <!-- Form fields and bindings -->
+        <div class="row">
+            <div class="col-md-3">
+                <h5>News Headline :</h5>
+            </div>
+            <div class="col-md-9">
+                <input class="col-md-9" type="text" id="title" name="title" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h5>News Brief :</h5>
+            </div>
+            <div class="col-md-9">
+                <textarea class="col-md-9" id="content" value="content" name="content" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Image Url :</h5>
+            </div>
+            <div class="col-md-9">
+                <input class="col-md-9" id="imgurl" name="imgurl" />
+            </div>
+        </div>
+
+
+        <!-- Submit button -->
+        <div><button class="btn btn-primary" type="submit">Upload on Site </button></div>
+    </form>
+</div>

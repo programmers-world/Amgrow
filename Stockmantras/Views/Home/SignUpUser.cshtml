@@ -1,0 +1,73 @@
+﻿@{
+    var successMessage = TempData["SignupOk"] as string;
+}
+@model Stockmantras.Models.SignUpUser
+    @*
+<div class="row">
+    <div class="col-md-4"></div>
+
+    <div class="col col-md-4 form-container">
+
+        <div class="row">
+            <div class="image-container">
+                <img src="~/images/signup.png" style="align-items:center;" />
+            </div>
+            <div class="col-12">
+                <form asp-controller="Home" asp-action="SignUpUser">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label">First Name :</label>
+                        <input type="text" asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label">Last Name:</label>
+                        <input type="text" asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email Address :</label>
+                        <input type="email" asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">Password :</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label">Confirm Password :</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div style="margin:20px;"></div>
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Register User" class="btn btn-primary btn-lg" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+*@
+
+<!--to display success message-->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = "@successMessage";
+        if (successMessage !== "") {
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: successMessage
+            });
+        }
+    });
+</script>

@@ -1,0 +1,151 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+<title>aryamoneygrow.com</title>
+<meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
+Are you looking to venture into the world of stock market investments and mutual funds? Look no further! Arya Money Grow is your one-stop-shop for all your financial needs, catering to beginners and seasoned investors alike. With a focus on providing up-to-date information, comprehensive investment tools, and personalized guidance, Arya Money Grow ensures that you make informed decisions to grow your wealth.
+At Arya Money Grow, we understand the importance of staying updated with live stock prices. Whether you are interested in tracking the Nifty, Sensex, or Bank Nifty, our website offers real-time data to help you make timely investment choices. We believe that knowledge is power, and therefore, we provide you with in-depth analysis and market insights, keeping you ahead of the game.
+Investment options can be overwhelming, but with Arya Money Grow, the process becomes seamless. Our platform empowers you to open a demat account effortlessly. Take advantage of our partnership with Angel One, a leading brokerage firm, to enjoy the benefits of their services and expertise in the stock market. We believe in transparent dealings and, thus, ensure that you are informed about all the demat account charges upfront.
+Mutual funds offer an excellent way to diversify your investment portfolio, and Arya Money Grow offers a plethora of options to explore. We provide comprehensive information on mutual fund companies, their performance, and investment plans available in the market. Our aim is to empower you with the necessary knowledge to invest wisely and achieve your financial goals.
+Are you unsure about which mutual funds to invest in? Worry not! Arya Money Grow's team of financial experts has curated a list of top-performing mutual funds, tailored to suit various risk appetites. By analyzing your preferences and financial objectives, we help you build a custom mutual fund portfolio that aligns with your long-term goals.
+With Arya Money Grow, accessing the stock market and mutual fund investments is now just a click away. Our user-friendly online demat account opening process ensures that you can start your investment journey within minutes. No more waiting in long queues or dealing with paperwork; we streamline the process to provide you with a hassle-free experience.
+Our platform offers a wide range of stock market stocks, bonds, and mutual funds to choose from, allowing you to diversify your investments and manage risk effectively. We understand that each investor is unique, and our goal is to cater to your specific needs, ensuring that you receive personalized attention and support at every step.
+Angel One, our trusted partner, is a renowned name in the industry, and its expertise ensures that you can buy mutual funds and other investment products with confidence. As you explore mutual fund information, you'll discover the benefits of professional fund management and how it can work in your favor.
+Our website is a treasure trove of valuable information about the money market, mutual funds, and the stock market. You can find detailed insights about investment strategies, mutual fund performance, market news, and more. Arya Money Grow is your go-to source for staying informed about the ever-changing financial landscape.
+We believe in transparency and aim to provide you with a comprehensive understanding of demat charges and other related expenses. Our commitment to guiding you towards smart investments is what sets us apart from the rest.
+In conclusion, Arya Money Grow is your reliable partner for stock market investments, mutual fund planning, and achieving your financial aspirations. With our extensive range of services and a user-friendly interface, we make sure that you have everything you need to make sound financial decisions.
+Begin your investment journey with Arya Money Grow today and witness your money grow steadily and securely. Let us help you build a prosperous financial future together!" />
+
+<meta name="keywords" content="insurance, latest insurance plans, choose best insurance plan for you, insorance plan, live stock price, nifty, sensex, Bank Nifty, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
+<meta name="author" content="mukesh chauhan" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var insurance = ViewBag.AllInsurances as IEnumerable<aryamoneygrow.Models.Insurance>;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card View</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .card {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .card-header h5 {
+                margin-bottom: 5px;
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-logo {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+        }
+
+        .card-description {
+            margin-bottom: 15px;
+        }
+
+        .card-rating i {
+            color: gold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="search-bar-container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search..." style="float: right;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var fund in insurance)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">@fund.INSU_COY</h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="@fund.INSU_LOGO_URL" alt="Logo" class="card-logo" />
+                            <p class="card-description">@fund.INSU_PLAN_TYPE</p>
+                            <p class="card-description">@fund.INSU_NAME</p>
+                            <a href="@fund.INSU_MORE_URL" class="btn btn-outline-primary btn-block"> View More ... </a>
+                            <div class="card-rating">
+                                @{
+                                    var rating = @fund.RATING;
+                                    for (int i = 1; i <= rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- JavaScript for search functionality -->
+    <script>
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            var input, filter, cards, card, title, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            cards = document.getElementsByClassName("card");
+
+            for (i = 0; i < cards.length; i++) {
+                card = cards[i];
+                title = card.querySelector(".card-title");
+                txtValue = title.textContent || title.innerText;
+
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS (optional) and Font Awesome JS (optional) remain the same -->
+</body>

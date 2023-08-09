@@ -1,0 +1,267 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@{
+    Layout = "_Layout";
+}
+<title>aryamoneygrow.com</title>
+<meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
+Are you looking to venture into the world of stock market investments and mutual funds? Look no further! Arya Money Grow is your one-stop-shop for all your financial needs, catering to beginners and seasoned investors alike. With a focus on providing up-to-date information, comprehensive investment tools, and personalized guidance, Arya Money Grow ensures that you make informed decisions to grow your wealth.
+At Arya Money Grow, we understand the importance of staying updated with live stock prices. Whether you are interested in tracking the Nifty, Sensex, or Bank Nifty, our website offers real-time data to help you make timely investment choices. We believe that knowledge is power, and therefore, we provide you with in-depth analysis and market insights, keeping you ahead of the game.
+Investment options can be overwhelming, but with Arya Money Grow, the process becomes seamless. Our platform empowers you to open a demat account effortlessly. Take advantage of our partnership with Angel One, a leading brokerage firm, to enjoy the benefits of their services and expertise in the stock market. We believe in transparent dealings and, thus, ensure that you are informed about all the demat account charges upfront.
+Mutual funds offer an excellent way to diversify your investment portfolio, and Arya Money Grow offers a plethora of options to explore. We provide comprehensive information on mutual fund companies, their performance, and investment plans available in the market. Our aim is to empower you with the necessary knowledge to invest wisely and achieve your financial goals.
+Are you unsure about which mutual funds to invest in? Worry not! Arya Money Grow's team of financial experts has curated a list of top-performing mutual funds, tailored to suit various risk appetites. By analyzing your preferences and financial objectives, we help you build a custom mutual fund portfolio that aligns with your long-term goals.
+With Arya Money Grow, accessing the stock market and mutual fund investments is now just a click away. Our user-friendly online demat account opening process ensures that you can start your investment journey within minutes. No more waiting in long queues or dealing with paperwork; we streamline the process to provide you with a hassle-free experience.
+Our platform offers a wide range of stock market stocks, bonds, and mutual funds to choose from, allowing you to diversify your investments and manage risk effectively. We understand that each investor is unique, and our goal is to cater to your specific needs, ensuring that you receive personalized attention and support at every step.
+Angel One, our trusted partner, is a renowned name in the industry, and its expertise ensures that you can buy mutual funds and other investment products with confidence. As you explore mutual fund information, you'll discover the benefits of professional fund management and how it can work in your favor.
+Our website is a treasure trove of valuable information about the money market, mutual funds, and the stock market. You can find detailed insights about investment strategies, mutual fund performance, market news, and more. Arya Money Grow is your go-to source for staying informed about the ever-changing financial landscape.
+We believe in transparency and aim to provide you with a comprehensive understanding of demat charges and other related expenses. Our commitment to guiding you towards smart investments is what sets us apart from the rest.
+In conclusion, Arya Money Grow is your reliable partner for stock market investments, mutual fund planning, and achieving your financial aspirations. With our extensive range of services and a user-friendly interface, we make sure that you have everything you need to make sound financial decisions.
+Begin your investment journey with Arya Money Grow today and witness your money grow steadily and securely. Let us help you build a prosperous financial future together!" />
+
+<meta name="keywords" content="live stock price, nifty, sensex, Bank Nifty, market news, latest tranding in financial market, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
+<meta name="author" content="mukesh chauhan" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+@{
+    var successMessage = TempData["PasswordSuccess"] as string;
+    var failMSG = TempData["InvalidLogin"] as string;
+    var testdata = TempData["CheckAPI"] as string;
+
+}
+
+
+<!-- Your other content for the index page -->
+<!--for hiding text of logos-->
+<style>
+    body {
+        color: black;
+    }
+
+    .hide-on-load {
+        /* Set the initial opacity to 0 (completely transparent) */
+        opacity: 0;
+        /* Set the transition duration (time taken for the opacity change) */
+        transition: opacity 0.5s;
+    }
+
+        /* When the element becomes visible, gradually increase the opacity to 1 (fully visible) */
+        .hide-on-load.show {
+            opacity: 1;
+        }
+</style>
+<script>
+    // Add the 'show' class to the element after the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        const hideOnLoadElements = document.getElementsByClassName("hide-on-load");
+        for (let i = 0; i < hideOnLoadElements.length; i++) {
+            hideOnLoadElements[i].classList.add("show");
+        }
+    });
+</script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--for icons images -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Add the div container for the marquee -->
+<div class="progress-bar-animated" style="background-color:lightgoldenrodyellow">
+
+    <marquee class="marq"
+             direction="left"
+             loop="">
+        @foreach (var stock in ViewBag.Nifty50Stocks_list)
+        {
+            var diff = stock.LTP - stock.PREV_CLOSE;
+            if (diff >= 0)
+            {
+                <span style="color:green; padding-right:5px">@stock.STOCK_NAME</span>
+                <span style="color: green; padding-right: 5px">@Math.Round(stock.LTP, 2)</span><span style="color: green; padding-right: 5px">&#9650;</span>
+                <span style="color: green; padding-right: 5px">@Math.Round(diff, 2)</span>
+            }
+            else
+            {
+                <span style="color:red; padding-right:5px">@stock.STOCK_NAME</span>
+                <span style="color: red; padding-right: 5px">@Math.Round(stock.LTP, 2)</span><span style="color: red; padding-right: 5px">&#9660;</span>
+                <span style="color: red; padding-right: 5px">@Math.Round(diff, 2)</span>
+            }
+
+        }
+
+    </marquee>
+</div>
+<div class="row">
+    <div class="col-lg-8 col-md-12 mb-4">
+        <div class="card-header btn-primary">
+            <div class="row">
+                <div class="col-3">
+                    <a asp-controller="Home" asp-action="Equities" style="color:white">
+                        <i class="material-icons">bar_chart</i>
+                        <span> Equity </span>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a asp-controller="Home" asp-action="MutualFund" style="color:white">
+                        <i class="material-icons">account_balance</i>
+                        <span>Mutual Fund</span>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a asp-controller="Home" asp-action="Insurances" style="color:white">
+                        <i class="material-icons">security</i>
+                        <span>Insurance</span>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a asp-controller="Home" asp-action="Coins" style="color:white">
+                        <i class="material-icons">attach_money</i>
+                        <span>Coins</span>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card card-header">
+
+            <div class="card-body">
+
+                @foreach (var item in ViewBag.NewsListAll)
+                {
+                    <div class="card-container justify-content-center border-5">
+                        <img class="card-img-top" src="@item.N_IMG_URL" alt="Card image cap">
+                        <div class="card-body border-bottom">
+                            <h3 class="card-title" style="text-align:justify">@item.N_HEADING</h3>
+                            <p class="justify-content-end" style="text-align:justify;color:black;">@item.N_BRIEF</p>
+                            <a href="@Url.Action("DetailedNews", "News", new { id = item.N_ID })" class="btn btn-outline-primary">Read more</a>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <!--second column-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card" style="width: auto;">
+
+            <div class="card-body">
+                <partial name="SensexCard" />
+                <h5 class="card-title" style="color:black;animation-delay:initial; border-block:double;">Arya Moneygrow Investments</h5>
+                <h6 class="card-subtitle mb-2 text-muted ">Invest today for secure your future</h6>
+                <p class="card-text">For any Query related to your Investment Please contact :</p>
+                <i class="material-icons">phone_android</i> 9988426378 <br />
+                <i class="material-icons">mail</i> aryamoneyg@gmail.com
+
+
+                <div class="active">
+                    <h6 style="text-align:justify; color:darkblue;"> Access a free complimentary technical analysis course to enhance your trading and investment analysis skills. </h6>
+                    <a class="btn-outline-primary" asp-controller="FreeCourse" asp-action="Index"> Join Now</a>
+
+                </div>
+            </div>
+        </div>
+        <div class=" card card-body">
+            <div class="card-header angelcard-header" style="text-align:center">INVEST WISELY</div>
+            <div class="angelcard-subheader angelcard-subheader" style="text-align:center"><b>Your Future Deserves The Best</b></div>
+            <div class="text-center">We're Your Trusted Partner in Investing</div>
+            <img class="angelcard-logo angelcard-logo text-center" src="https://w3assets.angelone.in/wp-content/uploads/2022/03/AO-logo-Desktop.png?v2" alt="">
+            <div>Let's Grow Together!</div>
+            <button class="card-button btn-outline-primary" onclick="trackButtonClick(); openInvestmentAccount()">Click and Open an Investment Account with Angel One</button>
+            <div>Open an investment account with Angel now for lifetime support and guidance from AryaMoneyGrow, along with discounted brokerage at just Rs. 20 per order! Hurry!</div>
+        </div>
+        <div class="card" style="width: auto;">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upcoming Events :</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.allEvents)
+                            {
+                                <tr>
+                                    <p style="color:blue; text-align:justify">@item.E_DATE.ToString("dd MMM yyyy")</p>
+                                    <p><b>  @item.E_COY</b></p>
+                                    <p style="text-align:justify;"> @item.E_BRIEF</p>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+</div>
+
+<div class="card-footer" style="text-align:justify; color:red">
+    Diclaimer: The investments discussed or recommended in the market analysis, research reports, etc. may not be suitable for all investors. Investors must make their own investment decisions based on their specific investment objectives and financial position and only after consulting such independent advisors as may be necessary.
+</div>
+
+
+
+<!--to display success message-->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = "@successMessage";
+        var fm = "@failMSG";
+        if (successMessage !== "") {
+            Swal.fire({
+                icon: "success",
+                title: "Password Changed...",
+                text: successMessage
+            });
+        }
+        if (fm !== "") {
+            Swal.fire({
+                icon: "fail",
+                title: "Invalid Credentials ...",
+                text: fm
+            });
+        }
+    });
+</script>
+
+<!--google event button angel sending count-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C0X699LX"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V1C0X699LX');
+
+    function trackButtonClick() {
+        // Send an event to Google Analytics 4
+        gtag('event', 'click', {
+            event_category: 'Button',
+            event_action: 'Click',
+            event_label: 'Investment Account Click'
+        });
+    }
+</script>
+
+<!-- JavaScript Function for Opening New Window -->
+<script>
+    function openInvestmentAccount() {
+        window.open('https://tinyurl.com/26uxk2wg');
+    }
+</script>

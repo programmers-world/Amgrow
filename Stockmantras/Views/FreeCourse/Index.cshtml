@@ -1,0 +1,397 @@
+﻿<title>aryamoneygrow.com</title>
+<meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
+Are you looking to venture into the world of stock market investments and mutual funds? Look no further! Arya Money Grow is your one-stop-shop for all your financial needs, catering to beginners and seasoned investors alike. With a focus on providing up-to-date information, comprehensive investment tools, and personalized guidance, Arya Money Grow ensures that you make informed decisions to grow your wealth.
+At Arya Money Grow, we understand the importance of staying updated with live stock prices. Whether you are interested in tracking the Nifty, Sensex, or Bank Nifty, our website offers real-time data to help you make timely investment choices. We believe that knowledge is power, and therefore, we provide you with in-depth analysis and market insights, keeping you ahead of the game.
+Investment options can be overwhelming, but with Arya Money Grow, the process becomes seamless. Our platform empowers you to open a demat account effortlessly. Take advantage of our partnership with Angel One, a leading brokerage firm, to enjoy the benefits of their services and expertise in the stock market. We believe in transparent dealings and, thus, ensure that you are informed about all the demat account charges upfront.
+Mutual funds offer an excellent way to diversify your investment portfolio, and Arya Money Grow offers a plethora of options to explore. We provide comprehensive information on mutual fund companies, their performance, and investment plans available in the market. Our aim is to empower you with the necessary knowledge to invest wisely and achieve your financial goals.
+Are you unsure about which mutual funds to invest in? Worry not! Arya Money Grow's team of financial experts has curated a list of top-performing mutual funds, tailored to suit various risk appetites. By analyzing your preferences and financial objectives, we help you build a custom mutual fund portfolio that aligns with your long-term goals.
+With Arya Money Grow, accessing the stock market and mutual fund investments is now just a click away. Our user-friendly online demat account opening process ensures that you can start your investment journey within minutes. No more waiting in long queues or dealing with paperwork; we streamline the process to provide you with a hassle-free experience.
+Our platform offers a wide range of stock market stocks, bonds, and mutual funds to choose from, allowing you to diversify your investments and manage risk effectively. We understand that each investor is unique, and our goal is to cater to your specific needs, ensuring that you receive personalized attention and support at every step.
+Angel One, our trusted partner, is a renowned name in the industry, and its expertise ensures that you can buy mutual funds and other investment products with confidence. As you explore mutual fund information, you'll discover the benefits of professional fund management and how it can work in your favor.
+Our website is a treasure trove of valuable information about the money market, mutual funds, and the stock market. You can find detailed insights about investment strategies, mutual fund performance, market news, and more. Arya Money Grow is your go-to source for staying informed about the ever-changing financial landscape.
+We believe in transparency and aim to provide you with a comprehensive understanding of demat charges and other related expenses. Our commitment to guiding you towards smart investments is what sets us apart from the rest.
+In conclusion, Arya Money Grow is your reliable partner for stock market investments, mutual fund planning, and achieving your financial aspirations. With our extensive range of services and a user-friendly interface, we make sure that you have everything you need to make sound financial decisions.
+Begin your investment journey with Arya Money Grow today and witness your money grow steadily and securely. Let us help you build a prosperous financial future together!" />
+
+<meta name="keywords" content="live stock price, nifty, sensex, Bank Nifty, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
+<meta name="author" content="mukesh chauhan" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@*
+
+*@
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+
+    <style>
+        /* Styles for the main layout */
+        .container {
+            display: flex;
+        }
+
+        p {
+            color: black;
+            text-align: justify;
+        }
+
+        .image-container {
+            width: 400px;
+            height: 300px;
+        }
+
+        .course-list {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .course-details {
+            flex-basis: 70%;
+            padding: 20px;
+        }
+
+        /* Styles for the course list */
+        .course-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+            .course-item:hover {
+                background-color: #e0e0e0;
+            }
+
+        /* Styles for the course details */
+        .course-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .course-description {
+            font-size: 16px;
+            line-height: 1.5;
+            color: black;
+            text-align: justify;
+        }
+
+        .course-list {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .course-details {
+            flex-basis: 70%;
+            padding: 20px;
+            color: black; /* Set font color to black */
+        }
+
+        /* Styles for the course list */
+        .course-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            color: black; /* Set font color to black */
+        }
+
+            .course-item:hover {
+                background-color: #e0e0e0;
+            }
+
+        .chapter-list {
+            margin-top: 10px;
+            margin-left: 20px;
+            display: none; /* Initially hide the chapter list */
+        }
+
+            .chapter-list .chapter-item {
+                margin-bottom: 5px;
+                padding: 5px;
+            }
+
+        /* Styles for the course details */
+        .course-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .course-description {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+    <div class="container">
+        <div class="course-list">
+            <div class="course-item bg-gradient" onclick="showCourseDetails('course1')">Preface</div>
+            <div class="course-item" onclick="showCourseDetails('course2')">What is Technical Analysis ?</div>
+            <div class="course-item" onclick="showCourseDetails('course3')">Dow Theory</div>
+            <div class="course-item" onclick="showCourseDetails('course4')">Candle Stick Chart</div>
+            <div class="course-item" onclick="showCourseDetails('course5')">Single Candle Stick </div>
+            <div class="course-item" onclick="showCourseDetails('course6')">Support and Resistance </div>
+            <div class="course-item" style="color:blue;" onclick="showCourseDetails('course7')">Bullish Candle Stick Patterns (Hammer) </div>
+            <div class="course-item" style="color:blue;" onclick="showCourseDetails('course8')">Bullish Engulfing </div>
+            <div class="course-item" style="color:blue;" onclick="showCourseDetails('course9')">Piercing Line </div>
+            <!-- Add more course items here as needed -->
+        </div>
+        <div class="course-details">
+            <div id="course1" style="display: block;">
+                <h2 class="course-title">PREFACE :</h2>
+                <p class="course-description">Welcome to the world of technical analysis for the stock market. This course is designed to be your ultimate guide to understanding and utilizing this powerful tool in your trading journey. With the knowledge and techniques outlined in this course, you will be able to make informed and confident decisions when it comes to buying and selling stocks. By delving into the intricacies of chart patterns, indicators, and market sentiment, you will be able to gain a deeper understanding of the market and how it operates. With this knowledge, you will be able to identify key opportunities and avoid potential pitfalls. But this course is not just about learning technical analysis. It's also about learning how to apply it in real-world scenarios and how to build a profitable trading strategy. This course will empower you with the skills and knowledge needed to take control of your financial future and achieve your goals as a trader. So whether you're a seasoned pro or a beginner just starting out, this course will bring an amazing difference in your trading journey.</p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course1')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course2')">Next</button>
+                </div>
+            </div>
+            <div id="course2" style="display: none;">
+                <h2 class="course-title">WHAT IS TECHNICAL ANALYSIS ? </h2>
+                <p class="course-description">Technical analysis is a method of evaluating securities by analysing statistics generated by market activity, such as past prices and volume. Technical analysts believe that the historical performance of a security, such as a stock, can indicate patterns that can be used to predict its future performance. They use charts and other tools to identify trends, patterns and indicators in the market, such as support and resistance levels, moving averages, and relative strength index. These tools and techniques can be used to identify potential buying or selling opportunities. Technical analysis is often used in conjunction with fundamental analysis, which looks at the underlying financial and economic factors of a company, to make investment decisions.</p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course1')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course3')">Next</button>
+                </div>
+            </div>
+            <div id="course3" style="display: none;">
+                <h2 class="course-title">DOW THEORY :</h2>
+                <p class="course-description">Dow Theory is a market analysis theory developed by Charles Dow in the late 1800s and early 1900s. The theory is based on the idea that the market moves in trends and that these trends can be identified and used to predict future market movements. </p>
+                <div>
+                    <img src="~/course-img/dowtheory.gif" />
+                </div>
+                <b>The Dow Theory consists of six basic principles:</b>
+                <p>
+                    <ol type="1" style="color:black">
+                        <li>The market has three movements: primary, secondary, and minor.</li>
+                        <li>The primary trend is the overall direction of the market and lasts for an extended period of time, usually several years.</li>
+                        <li>The secondary trend is a short-term correction within the primary trend and lasts for several weeks to several months.</li>
+                        <li>The minor trend is a very short-term fluctuation within the secondary trend and lasts for only a few days.</li>
+                        <li>Volume confirms the direction of the market trend.</li>
+                        <li>The market averages must confirm each other. This means that if the Dow Jones Industrial Average (DJIA) and the Dow Jones Transportation Average (DJTA) are both trending in the same direction, it is likely that the primary trend is in motion.</li>
+                    </ol>
+                <p>
+                    Dow Theory is often considered as a "classic" approach to market analysis, and the principles of Dow theory are still widely used by technical analysts today.
+                    Dow theory can make an impact on your trading by providing you with a clear understanding of the market's direction and potential trend changes. By identifying and analysing the primary, secondary and minor trends in the market, you can gain insight into the strength and direction of the market, and make more informed decisions about buying and selling securities. Additionally, by monitoring volume and confirming market averages, you can increase your confidence in the validity of your analysis and make more profitable trades.
+                </p>
+
+                </p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course2')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course4')">Next</button>
+                </div>
+            </div>
+            <!-- Candle stick Chart -->
+            <div id="course4" style="display: none;">
+                <h2 class="course-title">CANDLE STICK CHART :</h2>
+                <p class="course-description">A cand stick chart is a type of financial chart used to display the high, low, open and close prices of an asset over a certain period of time. It is commonly used in stock market analysis and other financial fields.</p>
+                <p>The color of the body of the cand stick is also significant, with a white (or green) body indicating that the close price was higher than the open price and a black (or red) body indicating that the close price was lower than the open price.</p>
+                <div class="row">
+                    <div class="col-6 card-body">
+                        <img src="~/course-img/candlestick.gif" class="image-container" />
+                    </div>
+                    <div class="col-6 card-body">
+                        <img src="~/course-img/candle_running_chart.gif" class="image-container" />
+                    </div>
+
+                </div>
+                <p>The chart is composed of a series of "candlesticks", each of which represents a specific period of time (e.g. one day, one week, one month). Each candle stick consists of a "body" and "wicks" (or "shadows"). The body of the candle stick represents the range between the open and close prices for the period, with the top of the body representing the close price and the bottom of the body representing the open price. The wicks (or shadows) represent the high and low prices for the period, with the top of the upper wick representing the high price and the bottom of the lower wick representing the low price.</p>
+                <p>The color of the body of the cand stick is also significant, with a white (or green) body indicating that the close price was higher than the open price and a black (or red) body indicating that the close price was lower than the open price.</p>
+                <p>Candlestick charts provide a visual representation of the price action of an asset over time, which can help traders and investors identify patterns and trends that may indicate future price movements.</p>
+                <br /><h2>FOUNDER OF CANDLE STICK : </h2>
+                <p>The origins of cand stick charting can be traced back to 18th century Japan, where a man named Homma Munehisa, a rice trader, developed the technique for use in the futures market. He discovered that the relationship between the open and close price, as well as the high and low price, of a security could provide valuable insights into market sentiment and potential future price movements. The technique was later popularized by Charles Dow, the founder of Dow Jones & Company and creator of the Dow Jones Industrial Average, in the late 19th and early 20th centuries.</p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course3')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course5')">Next</button>
+                </div>
+            </div>
+            <!-- Single Candle Stick -->
+            <div id="course5" style="display: none;">
+                <h2 class="course-title">SINGLE CANDLE STICK :</h2>
+                <p class="course-description">
+                    A single candle stick consists of a rectangular body with a vertical line (wick) on top and bottom. The top of the vertical line represents the highest traded price for the given period, and the bottom represents the lowest traded price for the given period. The rectangular body represents the range between the open price and the close price. See Image below : -
+                </p>
+                <img src="~/course-img/candlestick.gif" style="width:500px;height:400px;align-self:center;" />
+                <p>The color of the body is also important in candle stick charting. If the close price is higher than the open price, the body is typically coloured white or green, indicating a bullish sentiment. If the close price is lower than the open price, the body is typically coloured black or red, indicating a bearish sentiment.</p>
+                <p>The size of the body can also provide information about market sentiment, with a long body indicating a stronger move in price and a short body indicating a weaker move. The size of the wick can also indicate market sentiment, with a long wick indicating a strong rejection of higher or lower prices.</p>
+                <p>Overall Candlestick chart is a powerful tool for technical analysis, providing a wealth of information about market sentiment and potential future price movements in a simple, easy-to-read format.</p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course4')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course6')">Next</button>
+                </div>
+            </div>
+            <!-- Support and Resistance Chapter 6 -->
+            <div id="course6" style="display: none;">
+                <h2 class="course-title">SUPPORT AND RESISTANCE :</h2>
+                <p>In technical analysis, support and resistance refer to certain price levels at which a security's price tends to stop falling (support) or stop rising (resistance). These levels are determined by analysing past price movements and are used to predict future price behaviour.</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/supportgif.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Support</h5>
+                                    <p class="card-text">Support is a level where the price of an asset tends to find support as it falls. This means that the price tends to stop falling and bounce back up when it reaches this level. This level is determined by looking for a price at which the asset has had difficulty falling below in the past.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/resistancegif.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Resistance</h5>
+                                    <p class="card-text">Support is a level where the price of an asset tends to find support as it falls. This means that the price tends to stop falling and bounce back up when it reaches this level. This level is determined by looking for a price at which the asset has had difficulty falling below in the past.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="color:red;">Support and resistance levels are considered key levels for traders and investors to watch. When the price of an asset breaks through a key level of resistance, it is often seen as a bullish sign, indicating that the price may continue to rise. Conversely, when the price of an asset breaks through a key level of support, it is often seen as a bearish sign, indicating that the price may continue to fall.</p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course5')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course7')">Next</button>
+                </div>
+            </div>
+            <!-- Bullish Candle Stick Patterns ch-7 -->
+            <div id="course7" style="display: none;">
+                <h2 class="course-title">BULLISH CANDLE STICK PATTERNS :</h2>
+                <p class="course-description">The candlestick patterns mentioned are considered bullish, indicating a potential upward trend in the market. However, it is important to note that when these patterns form during an already bullish trend, it suggests a higher possibility of a trend reversal occurring.</p>
+                <h3>1. Hammer : </h3> <p>Hammer: a small body with a long lower wick, indicating a potential reversal from bearish to bullish.</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/hammer.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Hammer</h5>
+                                    <p class="card-text">The hammer pattern is considered a bullish reversal pattern because it shows that the bears were unable to sustain their downward momentum and the bulls were able to take control of the price. It is a sign that the bears are losing strength and the bulls may take control.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/hammerinchart.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Classic example of Hammer </h5>
+                                    <p class="card-text">The hammer pattern is a bullish reversal candlestick pattern that is formed after a downtrend. It is characterized by a small real body (the area between the open and close prices) near the top of the candle with a long lower shadow (the area between the low and the real body). The long lower shadow indicates that the bears tried to push the price lower, but the bulls stepped in and pushed the price back up near the open.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    It is important to note that the hammer pattern is more significant when it appears after a downtrend and has a long lower shadow that is at least twice the length of the real body. Additionally, the real body is typically at the upper end of the candle, although it can also be at the lower end.
+                    It is also important to remember that a hammer pattern alone does not confirm a reversal. It's always important to consider the overall market context and other technical indicators such as volume, trend lines, and support/resistance levels before making any trading decisions.
+                </p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course6')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course8')">Next</button>
+                </div>
+            </div>
+            <!-- Bullish Engulfing ch-8 -->
+            <div id="course8" style="display: none;">
+                <h2 class="course-title">BULLISH ENGULFING :</h2>
+                <p class="course-description">
+                    Bullish Engulfing: a large white or green candle that completely engulfs a small black or red candle, indicating a potential reversal from bearish to bullish.
+                    The bullish engulfing pattern is a bullish reversal candlestick pattern that occurs after a downtrend. It is characterized by a small red candle (bearish candle) followed by a large green candle (bullish candle) where the green candle completely "engulfs" the red candle. This pattern indicates that the bears were in control during the first candle but the bulls took control during the second candle, suggesting a potential reversal in the trend.
+                </p>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/bg.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bullish Engulfing</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/bullishengulfing.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bullish Engulfing on chart</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    It's important to note that a bullish engulfing pattern is more significant if it appears after a prolonged downtrend, and if the green candle has a long real body and little or no upper shadow. Additionally, it is considered more reliable if it is accompanied by an increase in volume.
+                    As always, it is important to consider the overall market context and other technical indicators such as trendlines, support/resistance levels and momentum indicators, before making any trading decisions based on a bullish engulfing pattern alone.
+                </p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course7')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course9')">Next</button>
+                </div>
+            </div>
+            <!-- Bullish Engulfing ch-9 -->
+            <div id="course9" style="display: none;">
+                <h2 class="course-title">PIERCING LINE :</h2>
+                <p class="course-description">
+                    Piercing Line: a white candle that opens below the previous black candle's close and closes above the midpoint of the previous black candle, indicating a potential reversal from bearish to bullish.
+                    The Piercing Line pattern is a bullish reversal candlestick pattern that occurs after a downtrend. It is characterized by a red candle followed by a green candle where the green candle opens below the low of the previous red candle but closes above the midpoint of the red candle's real body.
+                </p>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/persing1.gif" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piercing Line Pattern</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <img src="~/course-img/persing2.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Persing Line Pattern on chart</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    The Piercing Line pattern is considered a bullish reversal pattern because it suggests that the bears are losing momentum and the bulls are starting to take control of the price. It is more significant if it appears after a prolonged downtrend and if the green candle has a long real body and little or no upper shadow.
+                    It's important to note that the piercing line pattern is similar to the Bullish Engulfing pattern, but the main difference is that in Bullish Engulfing the green candle completely engulfs the red candle while in Piercing Line pattern the green candle only closes above the midpoint of the previous red candle.
+                    As always, it is important to consider the overall market context and other technical indicators such as trendlines, support/resistance levels, and volume before making any trading decisions based on a Piercing Line pattern alone.
+
+                </p>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course8')">Previous</button>
+                    <button class="btn btn-outline-primary" onclick="showCourseDetails('course10')">Next</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showCourseDetails(courseId) {
+            // Hide all course details sections
+            var courseDetails = document.querySelectorAll('.course-details > div');
+            for (var i = 0; i < courseDetails.length; i++) {
+                courseDetails[i].style.display = 'none';
+            }
+
+            // Show the selected course details section
+            document.getElementById(courseId).style.display = 'block';
+        }
+        function toggleSubMenu(courseId) {
+            var subMenu = document.getElementById(courseId + 'SubMenu');
+            subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>

@@ -1,0 +1,46 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    Layout = "_Layout_users";
+}
+else
+{
+    Layout = "_Layout";
+}
+<!-- Index.cshtml -->
+@model aryamoneygrow.Models.MarketOutlook
+
+<form method="post" asp-action="SubmitMarketOutlook">
+    <div class="card" style="padding:10px;">
+        <div class="row">
+            <div class="col-sm-4">
+                Market Outlook :
+            </div>
+            <div class="col-sm-8">
+                <textarea type="text" id="brief1" name="brief1" style="width:100%"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                Brief Outlook Nifty :
+            </div>
+            <div class="col-sm-8">
+                <textarea type="text" id="brief2" name="brief2" style="width:100%"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                Brief outlook for Bank Nifty :
+            </div>
+            <div class="col-sm-8">
+                <textarea type="text" id="brief3" name="brief3" style="width:100%"></textarea>
+            </div>
+        </div>
+        <div class="accordion-button col-sm-4">
+            <button class="btn-outline-primary" type="submit">Submit</button>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,47 @@
+﻿@model Stockmantras.Models.SignUpUser
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-5">
+            <div class="modal-header" style="background-color: #416C97;">
+                <h3 class="modal-title" id="exampleModalLongTitle" style="background: border-box; padding: 3px; color: yellow;">Register New User</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-controller="Home" asp-action="SignUpUser">
+                <div class="modal-body">
+                    <div class="text-center"><i class="fa fa-group" style="font-size:44px"></i></div>
+                 
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3" style="color:black;">First Name:</div>
+                        <div class="col-9"><input type="text" asp-for="FirstName" placeholder="Enter First Name" class="form-control-sm" style="width:100%;" /></div>
+                        <div class="col-12">. </div>
+                        <div class="col-3" style="color:black;">Last Name:</div>
+                        <div class="col-9"><input asp-for="LastName" type="text" class="form-control-sm" style="width:100%;" placeholder="Enter Last Name" /></div>
+                        <div class="col-12">.</div>
+                        <div class="col-3" style="color:black;">Email:</div>
+                        <div class="col-9"><input asp-for="Email" placeholder="Enter Email" class="form-control-sm" style="width:100%;" /></div>
+                        <div class="col-12">.</div>
+                        <div class="col-3" style="color:black;">Password:</div>
+                        <div class="col-9"><input asp-for="Password" type="password" class="form-control-sm" style="width:100%;" placeholder="Enter Password" /></div>
+                        <div class="col-12">.</div>
+                        <div class="col-3" style="color:black;">Confirm Password:</div>
+                        <div class="col-9"><input asp-for="ConfirmPassword" type="password" class="form-control-sm" style="width:100%;" placeholder="Confirm Password" /></div>
+                        <div class="col-12">.</div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Register Now</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

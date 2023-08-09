@@ -1,0 +1,61 @@
+﻿@{ 
+    // Cast the ViewBag.Nifty50Stocks_list to the appropriate type (e.g., List<Nifty50Stock>)
+    var nifty50Stocks = ViewBag.Nifty50Stocks_list as List<Nifty50Stocks>;
+    // Get the data for "Sensex"
+    
+   // var nifd = ViewBag.Nifty50Stocks_list as List<Nifty50Stocks>;
+    // Get the data for "Sensex"
+    var nifdata = nifty50Stocks?.FirstOrDefault(stock => stock.SYMBOL == "NIFTY 50");
+
+   // var bnif = ViewBag.Nifty50Stocks_list as List<Nifty50Stocks>;
+    // Get the data for "Sensex"
+    var bnifdata = nifty50Stocks?.FirstOrDefault(stock => stock.SYMBOL == "BNIFTY");
+}
+    
+    <div class="card row card-header" style="padding:2px">
+
+        <div class="col-sm-5">
+            <b>Nifty : </b>
+        </div>
+        <div class="col-sm-7">
+            @if (nifdata != null)
+            {
+                var diff = nifdata.LTP - nifdata.PREV_CLOSE;
+
+
+                @if (diff >= 0)
+                {
+                    <span style="color:green; padding-right:2px">@Math.Round(nifdata.LTP, 2)</span><span style="color:green; padding-right:2px">&#9650;</span>
+                    <span style="color:green; padding-right:2px">@Math.Round(diff, 2)</span>
+                }
+                else
+                {
+                    <span style="color:red; padding-right:2px">@Math.Round(nifdata.LTP, 2)</span><span style="color:red; padding-right:2px">&#9660;</span>
+                    <span style="color:red; padding-right:2px">@Math.Round(diff, 2)</span>
+                }
+            }
+        </div>
+        <div class="col-sm-5">
+            <b>Bank Nifty: </b>
+        </div>
+        <div class="col-sm-7">
+            @if (bnifdata != null)
+            {
+                var diff = bnifdata.LTP - bnifdata.PREV_CLOSE;
+
+
+                @if (diff >= 0)
+                {
+                    <span style="color:green; padding-right:2px">@Math.Round(bnifdata.LTP, 2)</span><span style="color:green; padding-right:2px">&#9650;</span>
+                    <span style="color:green; padding-right:2px">@Math.Round(diff, 2)</span>
+                }
+                else
+                {
+                    <span style="color:red; padding-right:2px">@Math.Round(bnifdata.LTP, 2)</span><span style="color:red; padding-right:2px">&#9660;</span>
+                    <span style="color:red; padding-right:2px">@Math.Round(diff, 2)</span>
+                }
+            }
+        </div>
+   </div>
+
+   

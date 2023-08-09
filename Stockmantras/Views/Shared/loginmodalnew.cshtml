@@ -1,0 +1,43 @@
+﻿@model Stockmantras.Models.LoginModel
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-5">
+            <div class="modal-header" style="background-color: #416C97;">
+                <h3 class="modal-title" id="exampleModalLongTitle" style="background: border-box; padding: 3px; color: yellow;">Login Form</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           
+            <form asp-controller="Home" asp-action="loginuser">
+                <div class="modal-body">
+                    <div class="text-center"><img src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/50/000000/external-password-authentication-for-desktop-computer-admin-login-web-duo-tal-revivo.png" /></div>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3" style="color:black;">User Name:</div>
+                        <div class="col-9"><input asp-for="Email" placeholder="Email" class="form-control-sm" style="width:100%;" /></div>
+                        <div class="col-12 invisible">.</div>
+                        <div class="col-3" style="color:black;">Password :</div>
+                        <div class="col-9"><input asp-for="Password" type="password" class="form-control-sm" style="width:100%;" placeholder="Enter Password" /></div>
+                        <div class="col-12 invisible">.</div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <div class="col-12 text-center">
+                            <label>
+                                <input class="form-check-input" asp-for="RememberMe" />@Html.DisplayNameFor(model => model.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+           
+            
+        </div>
+    </div>
+</div>
