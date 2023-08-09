@@ -27,7 +27,13 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <meta name="author" content="mukesh chauhan" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 @model Stockmantras.Models.News;
-@{  var allnews = ViewBag.AllNews as Stockmantras.Models.News;}
+@{ var allnews = ViewBag.AllNews as Stockmantras.Models.News;}
+
+<!-- to display thumbnail -->
+<title>@ViewBag.Title</title>
+<meta property="og:title" content="@allnews.N_HEADING">
+<meta property="og:description" content="@allnews.N_IMG_URL">
+<meta property="og:image" content="@allnews.N_BRIEF">
 <div class="card">
 
     <div class="card-body" style="padding:10px">
