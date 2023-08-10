@@ -462,7 +462,55 @@ namespace Stockmantras.Controllers
             
             
         }
+        [Authorize(Roles = "User,Admin,Coin")]
+        [HttpGet]
+        public IActionResult BuyMoreStocks(string id)
+        {
+            var stock_held = _dbcontext.tbl_Portfolio
+            .Where(e => e.SCRIPT_NAME.Equals(id) && e.USER_NAME.Equals(User.Identity.Name))
+            .ToList();
 
+          
+                BuyStock model = new BuyStock
+                {
+                    // Initialize model properties as needed
+                    ScriptName = stock_held.First().SCRIPT_NAME,
+                    BuyPrice = stock_held.First().PRICE,
+                    Quantity = stock_held.First().QUANTITY,
+                   TRADE_DATE = stock_held.First().TRADE_DATE
+                };
+            return View(model);
+        }
+        [Authorize(Roles = "User,Admin,Coin")]
+        [HttpPost]
+        public IActionResult BuyMoreStocks(BuyStock buyStock, int previous_qty, double previous_value  )
+        {
+            var fresh_qty = previous_qty + buyStock.Quantity;  // Add the newly purchased quantity to the previous quantity
+            var fresh_price = ((previous_value * previous_qty) + (buyStock.BuyPrice * buyStock.Quantity)) / fresh_qty;
+            // Calculate the total investment for the new quantity and price
+            var tot_investment = fresh_qty * fresh_price;
+
+            Portfolio pf = new Portfolio
+            {
+                USER_NAME = User.Identity.Name,
+                SCRIPT_NAME = buyStock.ScriptName,
+                TRADE_DATE = buyStock.TRADE_DATE,
+                QUANTITY = fresh_qty,
+                PRICE = Math.Round(fresh_price,2),
+                INVESTED_AMOUNT = Math.Round(tot_investment,2)
+            };
+            var existingRecord = _dbcontext.tbl_Portfolio.SingleOrDefault(p => p.USER_NAME == User.Identity.Name && p.SCRIPT_NAME == buyStock.ScriptName);
+            if (existingRecord != null)
+            {
+                existingRecord.QUANTITY = pf.QUANTITY;
+                existingRecord.PRICE = pf.PRICE;
+                existingRecord.INVESTED_AMOUNT = pf.INVESTED_AMOUNT;
+
+                _dbcontext.Update(existingRecord);
+                _dbcontext.SaveChanges();
+            }
+            return RedirectToAction("Index", "User");
+        }
     }
 
 }

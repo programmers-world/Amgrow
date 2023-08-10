@@ -1,5 +1,4 @@
-﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
-
+﻿
 @{
     Layout = "_Layout";
 }
@@ -21,7 +20,7 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <meta name="keywords" content="live stock price, nifty, sensex, Bank Nifty, market news, latest tranding in financial market, investment, open demate account, angel one, stock market, demat account, stock market stocks, demat, mutual fund investment, mutual funds to invest in, angel one share,money market mutual funds, mutual fund companies, demat account charges, managed funds, open demat account online, mutual funds, investment plans, mutual fund portfolio, online demat account, angelone share, angelone demat account, stock mutual funds, angel one com, buy mutual funds, it mutual funds, mutual fund com, angel one limited, angel one broking, mutual fund information, demat account opening charges, mutual fund details, mf investment, money mutual fund, a mutual fund, demat charges, muchul fund com, stocks bonds and mutual funds, angel one company, mutual fund is, mutual fund market, demat account opening process, create demat account, stocks, equity, mutual fund, coins, market news " />
 <meta name="author" content="mukesh chauhan" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @{
     var successMessage = TempData["PasswordSuccess"] as string;
@@ -66,6 +65,11 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!--for icons images -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--to display success message-->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+<!--for charts-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Add the div container for the marquee -->
 <div class="progress-bar-animated" style="background-color:lightgoldenrodyellow">
@@ -94,66 +98,105 @@ Begin your investment journey with Arya Money Grow today and witness your money 
     </marquee>
 </div>
 <div class="row">
-    <div class="col-lg-8 col-md-12 mb-4">
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card-header btn-primary">
             <div class="row">
-                <div class="col-3">
+                <div class="col-6" style="padding:5px;">
                     <a asp-controller="Home" asp-action="Equities" style="color:white">
                         <i class="material-icons">bar_chart</i>
                         <span> Equity </span>
                     </a>
                 </div>
-                <div class="col-3">
+                <div class="col-6" style="padding:5px;">
                     <a asp-controller="Home" asp-action="MutualFund" style="color:white">
                         <i class="material-icons">account_balance</i>
                         <span>Mutual Fund</span>
                     </a>
                 </div>
-                <div class="col-3">
+                <div class="col-6" style="padding:5px;">
                     <a asp-controller="Home" asp-action="Insurances" style="color:white">
                         <i class="material-icons">security</i>
                         <span>Insurance</span>
                     </a>
                 </div>
-                <div class="col-3">
+                <div class="col-6" style="padding:5px;">
                     <a asp-controller="Home" asp-action="Coins" style="color:white">
                         <i class="material-icons">attach_money</i>
                         <span>Coins</span>
                     </a>
                 </div>
             </div>
-
-
         </div>
 
-        <div class="card card-header">
+        @*<div class="card card-header">*@
 
+    <div class="card-body">
+        @foreach (var item in ViewBag.NewsListAll)
+        {
+            <div class="card-container justify-content-center border-5">
+                <img class="card-img-top" src="@item.N_IMG_URL" alt="Card image cap">
+                <div class="card-body border-bottom">
+                    <strong class="card-heading" style="text-align: justify">@item.N_HEADING</strong>
+                    <p class="justify-content-end" style="text-align: justify; color: black;">
+                        @Html.Raw(item.N_BRIEF.Substring(0, Math.Min(item.N_BRIEF.Length, 100))) @* Display first 100 characters *@
+                        @if (item.N_BRIEF.Length > 100)
+                        {
+                            <span id="readMore_@item.N_ID" style="display: none;">@Html.Raw(item.N_BRIEF.Substring(100))</span>
+                            <a href="javascript:void(0);" onclick="toggleReadMore('@item.N_ID')">Read more</a>
+                        }
+                    </p>
+                    <a href="@Url.Action("DetailedNews", "News", new { id = item.N_ID })" class="btn btn-outline-primary">Continue to read...</a>
+                </div>
+            </div>
+        }
+    </div>
+       @* </div>*@
+    </div>
+    <!--another column for chart-->
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+        <div class="card-header bg-primary text-white">
+            <strong>Market Sentiment</strong>
+        </div>
+        <div class="card-body">
+            <partial name="SensexCard" />
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">Nifty Advance/Declines:</div>
+            <div class="card-body"><canvas id="niftyChart"></canvas></div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <strong>Upcoming Events :</strong>
+            </div>
             <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.allEvents)
+                        {
+                            <tr>
+                                <p style="color:blue; text-align:justify">@item.E_DATE.ToString("dd MMM yyyy")</p>
+                                <p><b>  @item.E_COY</b></p>
+                                <p style="text-align:justify;">@Html.Raw(item.E_BRIEF.Replace("zzz", "<br>"))</p>
 
-                @foreach (var item in ViewBag.NewsListAll)
-                {
-                    <div class="card-container justify-content-center border-5">
-                        <img class="card-img-top" src="@item.N_IMG_URL" alt="Card image cap">
-                        <div class="card-body border-bottom">
-                            <h3 class="card-title" style="text-align:justify">@item.N_HEADING</h3>
-                            <p class="justify-content-end" style="text-align:justify;color:black;">@item.N_BRIEF</p>
-                            <a href="@Url.Action("DetailedNews", "News", new { id = item.N_ID })" class="btn btn-outline-primary">Read more</a>
-                        </div>
-                    </div>
-                }
-
-
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <!--second column-->
-    <div class="col-lg-4 col-md-12 mb-4">
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card" style="width: auto;">
 
             <div class="card-body">
-                <partial name="SensexCard" />
-                <h5 class="card-title" style="color:black;animation-delay:initial; border-block:double;">Arya Moneygrow Investments</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Invest today for secure your future</h6>
+
+                <h5 class="card-header" style="color:black;animation-delay:initial; border-block:double;">Arya Moneygrow Investments</h5>
+                <h6 class="card-subtitle mb-2 text-muted" style="padding-top:10px;">Invest today for secure your future</h6>
                 <p class="card-text">For any Query related to your Investment Please contact :</p>
                 <i class="material-icons">phone_android</i> 9988426378 <br />
                 <i class="material-icons">mail</i> aryamoneyg@gmail.com
@@ -173,10 +216,10 @@ Begin your investment journey with Arya Money Grow today and witness your money 
             <img class="angelcard-logo angelcard-logo text-center" src="https://w3assets.angelone.in/wp-content/uploads/2022/03/AO-logo-Desktop.png?v2" alt="">
             <div>Let's Grow Together!</div>
             <button class="card-button btn-outline-primary" onclick="trackButtonClick(); openInvestmentAccount()">Click and Open an Investment Account with Angel One</button>
-            <div>Open an investment account with Angel now for lifetime support and guidance from AryaMoneyGrow, along with discounted brokerage at just Rs. 20 per order! Hurry!</div>
+            <div class="card-img-bottom" style="text-align:justify">Open an investment account with Angel now for lifetime support and guidance from Arya Money Grow, along with discounted brokerage at just Rs. 20 per order! Hurry!</div>
         </div>
         <div class="card" style="width: auto;">
-            <div class="card">
+           @* <div class="card">
                 <div class="card-header">
                     <h5>Upcoming Events :</h5>
                 </div>
@@ -199,12 +242,13 @@ Begin your investment journey with Arya Money Grow today and witness your money 
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>*@
 
         </div>
     </div>
 
 </div>
+
 
 <div class="row">
 
@@ -216,9 +260,7 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 
 
 
-<!--to display success message-->
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -263,5 +305,70 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <script>
     function openInvestmentAccount() {
         window.open('https://tinyurl.com/26uxk2wg');
+    }
+</script>
+<!--chart advance / declines-->
+<script>
+    // Define positive and negative counts
+    var positiveCount = 0; // Replace with your actual positive count
+    var negativeCount = 0; // Replace with your actual negative count
+
+    // Calculate counts from stock data
+    @foreach (var stock in ViewBag.Nifty50Stocks_list)
+    {
+        var difference = stock.LTP - stock.PREV_CLOSE;
+        if (difference < 0)
+        {
+            @:negativeCount++; // Increment negative count
+        }
+        else if (difference > 0)
+        {
+            @:positiveCount++; // Increment positive count
+        }
+    }
+
+    // Create data array for the chart
+    var dataFromTable = [
+        { "Advances:": positiveCount },
+        { "Declines:": negativeCount }
+    ];
+
+    var labels = dataFromTable.map(item => Object.keys(item)[0]);
+    var values = dataFromTable.map(item => Object.values(item)[0]);
+
+    // Define colors (green for Advances, red for Declines)
+    var colors = ['#00FF00', '#FF0000'];
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('niftyChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: colors
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    });
+</script>
+<!--for news read more-->
+<script>
+    function toggleReadMore(newsId) {
+        var readMoreSpan = document.getElementById("readMore_" + newsId);
+        if (readMoreSpan.style.display === "none") {
+            readMoreSpan.style.display = "inline";
+        } else {
+            readMoreSpan.style.display = "none";
+        }
     }
 </script>

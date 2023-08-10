@@ -17,6 +17,7 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <meta name="author" content="mukesh chauhan" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+
 @{
     Layout = "_Layout_users";
 }
@@ -113,7 +114,7 @@ Begin your investment journey with Arya Money Grow today and witness your money 
                                     <th>Investment Value</th>
                                     <th>Current Value</th>
                                     <th>Profit/Loss</th>
-                                    <th>Remark</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,26 +125,47 @@ Begin your investment journey with Arya Money Grow today and witness your money 
                                 }
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                <tr>
 
-                                        <td>@item.Portfolio.TRADE_DATE.ToString("dd-MM-yyyy")</td>
-                                        <td style="text-align:left">@item.Portfolio.SCRIPT_NAME</td>
-                                        <td>@item.Portfolio.QUANTITY</td>
-                                        <td>@Math.Round(item.Portfolio.PRICE, 2)</td>
-                                        <td>@Math.Round(item.EquitiesLTP, 2)</td>
-                                        <td>@Math.Round(item.Portfolio.INVESTED_AMOUNT, 2)</td>
-                                        <td style="color: @(item.EquitiesLTP * item.Portfolio.QUANTITY <= item.Portfolio.PRICE * item.Portfolio.QUANTITY ? "red" : "green")">
-                                            @Math.Round(item.EquitiesLTP * item.Portfolio.QUANTITY, 2)
-                                        </td>
-                                        <!-- ... Display more Portfolio fields ... -->
-                                        @{
-                                            double x = (@item.EquitiesLTP * @item.Portfolio.QUANTITY - @item.Portfolio.PRICE * @item.Portfolio.QUANTITY);
-                                        }
+                                    <td>@item.Portfolio.TRADE_DATE.ToString("dd-MM-yyyy")</td>
+                                    <td style="text-align:left">@item.Portfolio.SCRIPT_NAME</td>
+                                    <td>@item.Portfolio.QUANTITY</td>
+                                    <td>@Math.Round(item.Portfolio.PRICE, 2)</td>
+                                    <td>@Math.Round(item.EquitiesLTP, 2)</td>
+                                    <td>@Math.Round(item.Portfolio.INVESTED_AMOUNT, 2)</td>
+                                    <td style="color: @(item.EquitiesLTP * item.Portfolio.QUANTITY <= item.Portfolio.PRICE * item.Portfolio.QUANTITY ? "red" : "green")">
+                                        @Math.Round(item.EquitiesLTP * item.Portfolio.QUANTITY, 2)
+                                    </td>
+                                    <!-- ... Display more Portfolio fields ... -->
+                                    @{
+                                        double x = (@item.EquitiesLTP * @item.Portfolio.QUANTITY - @item.Portfolio.PRICE * @item.Portfolio.QUANTITY);
+                                    }
 
-                                        <td style="color: @(x <= 0 ? "red" : "green")"> @Math.Round(x, 2)</td>
-                                        <td>@item.Portfolio.REMARK</td>
+                                    <td style="color: @(x <= 0 ? "red" : "green")"> @Math.Round(x, 2)</td>
+                                    <td>
+                                        <a href="@Url.Action("BuyMorestocks", "User", new { id = item.Portfolio.SCRIPT_NAME })" class="btn btn-primary">Buy More... </a>
+                                        @*<form asp-controller="User" asp-action="BuyMoreStocks" method="get">
+                                            <input type="hidden" name="buyprice" value="@item.Portfolio.PRICE" />
+                                            <input type="hidden" name="scriptName" value="@item.Portfolio.SCRIPT_NAME" />
+                                            <input type="hidden" name="quantity" value="@item.Portfolio.QUANTITY" />
+                                            <input type="hidden" name="sellprice" value="@item.EquitiesLTP" />
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-shopping-cart"></i> Buy
+                                            </button>
+                                        </form>*@
+                                    </td>
+                                    @*<td>
+                                        <form asp-controller="User" asp-action="SellStock" method="get">
+                                            <input type="hidden" name="tradeDate" value="@item.Portfolio.TRADE_DATE.ToString("dd-MM-yyyy")" />
+                                            <input type="hidden" name="scriptName" value="@item.Portfolio.SCRIPT_NAME" />
+                                            <input type="hidden" name="quantity" value="@item.Portfolio.QUANTITY" />
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-dollar-sign"></i> Sell
+                                            </button>
+                                        </form>
+                                    </td>*@
 
-                                    </tr>
+                                </tr>
 
                                     totalInvestment += item.Portfolio.PRICE * item.Portfolio.QUANTITY;
                                     currentVal += item.EquitiesLTP * item.Portfolio.QUANTITY;
@@ -179,7 +201,7 @@ Begin your investment journey with Arya Money Grow today and witness your money 
                 <div class="card-body"><canvas id="myPieChart"></canvas></div>
             </div>
         </div>
-       
+
 
     }
 </body>
@@ -188,6 +210,8 @@ Begin your investment journey with Arya Money Grow today and witness your money 
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <!--trying to display data in chart-->
 <script>
     // Get the tabular data (replace this with your actual data)

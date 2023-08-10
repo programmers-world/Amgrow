@@ -7,9 +7,9 @@ namespace aryamoneygrow.Models
     {
         [Key]
         public int E_ID { get; set; }
-
+        [DataType(DataType.Html)]
         public string E_COY { get; set; }
-
+        [DataType(DataType.Html)]
         public string E_BRIEF { get; set; }
 
         public DateTime E_DATE { get; set; }

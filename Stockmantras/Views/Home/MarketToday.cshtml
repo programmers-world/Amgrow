@@ -1,12 +1,5 @@
-﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
-
-@if (_signInManager.IsSignedIn(User))
-{
-    Layout = "_Layout_users";
-}
-else
-{
-    Layout = "_Layout";
+﻿@{ 
+    Layout = null;
 }
 <title>aryamoneygrow.com</title>
 <meta name="description" content=" Welcome to Arya Money Grow - Your Ultimate Destination for Stock Market and Mutual Fund Investments
